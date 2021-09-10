@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
+import axios from "axios";
+import Home from './Views/Home';
+import Login from './Views/Login';
+import Sidebar from './Components/Sidebar';
+import Navegacion from './Components/Navegacion';
+import {Row,Col} from 'react-bootstrap';
+let {REACT_APP_URL} = process.env;
+axios.defaults.baseURL =REACT_APP_URL;
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App vh-100 vw-100">
+      <Row className="h-100 vw-100 m-0">
+        <Col md={2} className="p-0">
+          <Sidebar></Sidebar>
+        </Col>
+        <Col md={10} className="p-0">      
+        <Navegacion></Navegacion>
+        <Router>
+        <Switch>
+          <Route exact path="/" component={Home}></Route>
+          <Route exact path="/login" component={Login}></Route>
+        </Switch>
+      </Router></Col>
+      </Row>
+
     </div>
   );
 }
