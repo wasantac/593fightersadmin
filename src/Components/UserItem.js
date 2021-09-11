@@ -1,12 +1,11 @@
 import React from 'react';
 import {ListGroup} from 'react-bootstrap'
-import CsvDownload from 'react-json-to-csv'
 import axios from 'axios';
 import Swal from 'sweetalert2';
-const TorneoItem = ({torneo}) => {
+const UserItem = ({usuario}) => {
     let eliminar = (e) => {
         Swal.fire({
-            title: '¿Deseas eliminar el torneo?',
+            title: '¿Deseas eliminar el usuario?',
             icon: 'info',
             showDenyButton: true,
             confirmButtonText: 'Confirmar',
@@ -14,8 +13,8 @@ const TorneoItem = ({torneo}) => {
           }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-              axios.delete(`/torneos/${torneo._id}?token=${localStorage.getItem('token')}`).then(res => {
-                Swal.fire('¡Torneo Eliminado!', '', 'success').then(() => {
+              axios.delete(`/users/${usuario._id}?token=${localStorage.getItem('token')}`).then(res => {
+                Swal.fire('¡Usuario Eliminado!', '', 'success').then(() => {
                     window.location.reload()
                 })
               }).catch(err => {
@@ -26,13 +25,12 @@ const TorneoItem = ({torneo}) => {
     }
     return (
         <ListGroup.Item className="d-flex justify-content-between">
-            <div className="d-flex align-items-center justify-content-center">{torneo.titulo}</div>
+            <div className="d-flex align-items-center justify-content-center">{usuario.user} | {usuario.nombre} | {usuario.nick}</div>
             <div>
-            <CsvDownload className="btn btn-success mx-1" filename={`${torneo.titulo}.csv`} data={torneo.participantes}>Descargar csv</CsvDownload>
             <button className="btn btn-danger mx-1" onClick={eliminar}>Eliminar</button>
             </div>
         </ListGroup.Item>
     );
 }
 
-export default TorneoItem;
+export default UserItem;

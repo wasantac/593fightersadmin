@@ -10,6 +10,8 @@ import Sidebar from './Components/Sidebar';
 import Navegacion from './Components/Navegacion';
 import {Row,Col} from 'react-bootstrap';
 import Torneos from "./Views/Torneos";
+import Usuarios from "./Views/Usuarios";
+import Calendario from './Views/Calendario';
 let {REACT_APP_URL} = process.env;
 axios.defaults.baseURL =REACT_APP_URL;
 function App() {
@@ -27,6 +29,8 @@ function App() {
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/login" component={Login}></Route>
           <Route exact path="/torneos" component={Torneos}></Route>
+          <Route exact path="/usuarios" component={Usuarios}></Route>
+          <Route exact path="/calendario" component={Calendario}></Route>
         </Switch>
       </Router></Col>
       </Row>

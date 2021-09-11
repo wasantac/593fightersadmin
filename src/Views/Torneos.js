@@ -61,26 +61,26 @@ const Torneos = () => {
                 <Col>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Nombre del Torneo</Form.Label>
-                    <Form.Control type="text"  />
+                    <Form.Control type="text" required />
                     </Form.Group>
                 </Col>
                 <Col>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Fecha del Torneo</Form.Label>
                     <DatePicker className="form-control"selected={startDate} showTimeSelect onChange={(date) => 
-                        setStartDate(date)} />
+                        setStartDate(date)}  required/>
                 </Form.Group>
                 </Col>
             </Row>
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Descripción</Form.Label>
-                <Form.Control as="textarea" rows={3} />
+                <Form.Control as="textarea" rows={3}  required/>
             </Form.Group>
             <Row>
                 <Col>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Juego</Form.Label>
-                    <select className="form-select" aria-label="Default select example">
+                    <select className="form-select" aria-label="Default select example"  required>
                     <option value="gg">Guilty Gear Strive</option>
                     <option value="db">Dragon Ball FighterZ</option>
                     <option value="otro">Otro</option>
@@ -90,13 +90,13 @@ const Torneos = () => {
                 <Col>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Premio</Form.Label>
-                    <Form.Control type="text" />
+                    <Form.Control type="text"  required/>
                 </Form.Group>
                 </Col>
                 <Col>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Máximo de Jugadores</Form.Label>
-                    <Form.Control type="number" />
+                    <Form.Control type="number" required />
                 </Form.Group>
                 </Col>
             </Row>
