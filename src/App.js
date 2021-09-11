@@ -1,8 +1,7 @@
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect
+  Route
 } from "react-router-dom";
 import axios from "axios";
 import Home from './Views/Home';
@@ -10,9 +9,11 @@ import Login from './Views/Login';
 import Sidebar from './Components/Sidebar';
 import Navegacion from './Components/Navegacion';
 import {Row,Col} from 'react-bootstrap';
+import Torneos from "./Views/Torneos";
 let {REACT_APP_URL} = process.env;
 axios.defaults.baseURL =REACT_APP_URL;
 function App() {
+
   return (
     <div className="App vh-100 vw-100">
       <Row className="h-100 vw-100 m-0">
@@ -25,6 +26,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home}></Route>
           <Route exact path="/login" component={Login}></Route>
+          <Route exact path="/torneos" component={Torneos}></Route>
         </Switch>
       </Router></Col>
       </Row>

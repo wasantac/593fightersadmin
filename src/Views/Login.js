@@ -4,11 +4,22 @@ import Button from 'react-bootstrap/Button';
 import {Row,Col} from 'react-bootstrap';
 import {useHistory} from 'react-router-dom';
 import '../css/login.scss';
-
+import axios from 'axios';
 const Login = () => {
     const history = useHistory();
     let handleSubmit = (e) => {
-        history.push('/');
+        let username = e.target[0].value;
+        let password = e.target[1].value;
+        axios.post(`/login/admin`,{
+            username,
+            password,
+        },).then(res => {
+            console.log(res.data)
+            localStorage.setItem('token',res.data.token)
+            history.push(`/`)
+            window.location.reload();
+        })
+
         e.preventDefault();
     }
     return (
