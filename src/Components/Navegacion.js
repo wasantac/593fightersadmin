@@ -23,7 +23,7 @@ const Navegacion = () => {
       <Container>
         <Nav className="me-auto">
           <p className="text-white my-1">
-            Version 0.1
+            Version 0.2
           </p>
         </Nav>
         <Nav>

@@ -20,10 +20,10 @@ function App() {
     <div className="App vh-100 vw-100">
       <Row className="h-100 vw-100 m-0">
         <Col lg={1} md={2} className="p-0">
-          <Sidebar></Sidebar>
+          {localStorage.getItem('token') && <Sidebar></Sidebar>}
         </Col>
         <Col lg={11} md={10} className="p-0">
-          <Navegacion></Navegacion>
+          {localStorage.getItem('token') && <Navegacion></Navegacion>}
           <Router>
             <Switch>
               <Route exact path="/" component={Home}></Route>
@@ -32,7 +32,8 @@ function App() {
               <Route exact path="/usuarios" component={Usuarios}></Route>
               <Route exact path="/calendario" component={Calendario}></Route>
             </Switch>
-          </Router></Col>
+          </Router>
+        </Col>
       </Row>
 
     </div>
