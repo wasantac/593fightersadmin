@@ -2,11 +2,11 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 
 const data = {
-    labels: ['1', '2', '3', '4', '5', '6'],
+    labels: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'],
     datasets: [
         {
             label: '# de Visitas',
-            data: [12, 19, 3, 5, 2, 3],
+            data: [12, 19, 3, 5, 2, 3, 15],
             fill: false,
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgba(255, 99, 132, 0.2)',
