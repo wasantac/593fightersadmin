@@ -1,44 +1,73 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import Dashboardpills from '../Components/Dashboardpills';
-import LineChart from '../Components/LineChart';
-import axios from 'axios';
-import DoughnutChart from '../Components/DoughnutChart';
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import Dashboardpills from "../Components/Dashboardpills";
+import LineChart from "../Components/LineChart";
+import axios from "axios";
+import DoughnutChart from "../Components/DoughnutChart";
 const Home = () => {
-    const [numTorneos, setNumTorneos] = useState({ activos: 0, total: 0, finalizado: 0 });
-    const [user, setUser] = useState(0)
+    const [numTorneos, setNumTorneos] = useState({
+        activos: 0,
+        total: 0,
+        finalizado: 0,
+    });
+    const [user, setUser] = useState(0);
     useEffect(() => {
-        axios.get('/torneos/count').then(res => {
-            setNumTorneos({
-                activos: res.data.activos,
-                total: res.data.torneo,
-                finalizado: res.data.torneo - res.data.activos
+        if (!localStorage.getItem("token")) {
+            axios
+                .get(
+                    `/login/admin?token=${
+                        localStorage.getItem("token")
+                            ? localStorage.getItem("token")
+                            : "null"
+                    }`
+                )
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    if (window.location.href !== "/login") {
+                        window.location.href = "/login";
+                    }
+                });
+        }
+
+        axios
+            .get(`/torneos/count`)
+            .then((res) => {
+                setNumTorneos({
+                    activos: res.data.activos,
+                    total: res.data.torneo,
+                    finalizado: res.data.torneo - res.data.activos,
+                });
+                setUser(res.data.user);
             })
-            setUser(res.data.user)
-        }).catch(err => { })
-    }, [])
+            .catch((err) => {});
+    }, []);
     return (
-        <Container fluid classname="mt-2">
+        <Container fluid className="mt-2">
             <h1 className="text-center mt-2">Dashboard</h1>
             <Dashboardpills></Dashboardpills>
             <Row className="mt-2">
                 <Col md={6}>
-                    <div className="card my-3 p-5 shadow-sm"><LineChart></LineChart></div>
-                    <div className="card my-3 p-5 shadow-sm" >
+                    <div className="card my-3 p-5 shadow-sm">
+                        <LineChart></LineChart>
+                    </div>
+                    <div className="card my-3 p-5 shadow-sm">
                         <Row className="tarjeta">
-                            <Col md={6} >
+                            <Col md={6}>
                                 <h3>Usuarios Registrados</h3>
                                 <h6>{user}</h6>
                             </Col>
-                            <Col md={6} >
+                            <Col md={6}>
                                 <h3>Usuarios Registrados</h3>
                                 <h6>{user}</h6>
                             </Col>
-                            <Col md={6} >
+                            <Col md={6}>
                                 <h3>Usuarios Registrados</h3>
                                 <h6>{user}</h6>
                             </Col>
-                            <Col md={6} >
+                            <Col md={6}>
                                 <h3>Usuarios Registrados</h3>
                                 <h6>{user}</h6>
                             </Col>
@@ -46,7 +75,9 @@ const Home = () => {
                     </div>
                 </Col>
                 <Col md={6}>
-                    <div className="card my-3 p-5 shadow-sm"><DoughnutChart torneos={numTorneos}></DoughnutChart></div>
+                    <div className="card my-3 p-5 shadow-sm">
+                        <DoughnutChart torneos={numTorneos}></DoughnutChart>
+                    </div>
                 </Col>
                 <Col md={12}>
                     <div className="card my-3 p-5 shadow-sm">
@@ -55,8 +86,8 @@ const Home = () => {
                     </div>
                 </Col>
             </Row>
-        </Container >
+        </Container>
     );
-}
+};
 
 export default Home;
